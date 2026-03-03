@@ -1,0 +1,5 @@
+# Allow all crawlers. Replace your-domain.com with your production domain.
+User-agent: *
+Allow: /
+
+Sitemap: https://your-domain.com/sitemap.xml
