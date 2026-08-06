@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="fr" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07080f" />
+    <meta name="author" content="Johann Avramov" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!--
+      Fonts are self-hosted (see scripts/fetch-fonts.mjs): no render-blocking
+      request to the Google Fonts CDN, and no visitor IP sent to a third party.
+      Only the two faces used above the fold are preloaded.
+    -->
+    <link rel="preload" href="/fonts/syne-600-800-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-300-700-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!--head-start-->
+    <!--
+      Default (French) head. `npm run build` replaces everything between the
+      head-start and head-end markers, once per locale, from src/i18n/*.ts and
+      site.config.js. Keep this block in sync by rebuilding, not by hand.
+    -->
+    <title>Johann Avramov | Développeur Full-Stack TypeScript / PHP | Suisse romande</title>
+    <meta
+      name="description"
+      content="Développeur full-stack TypeScript et PHP chez Orange. Angular, TypeScript, Node.js, Symfony. Relocalisation en Suisse romande, Genève et Lausanne, dès la signature d'un contrat."
+    />
+    <!--head-end-->
+
+    <!-- Analytics: cookieless, no consent banner required -->
+    <script src="https://app.rybbit.io/api/script.js" data-site-id="a6c178666f89" defer></script>
+
+    <!-- Restore the saved theme before React loads, to avoid a flash -->
+    <script>
+      (function () {
+        try {
+          if (localStorage.getItem("theme") === "light") {
+            document.documentElement.classList.add("light");
+          }
+        } catch (e) {
+          /* private mode: keep the default dark theme */
+        }
+      })();
+    </script>
+
+  </head>
+  <body class="antialiased">
+    <div id="root"><!--app-html--></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,201 @@
+@import "tailwindcss";
+@import "./fonts.css";
+
+@theme {
+  /* Typography */
+  --font-display: "Syne", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+
+  /* Dark background palette (default) */
+  --color-bg: #07080f;
+  --color-surface: #0f1117;
+  --color-elevated: #161b27;
+  --color-border: #1a2033;
+  --color-border-light: #242d3f;
+
+  /* Text */
+  --color-text: #e8eaf6;
+  --color-text-muted: #8892a4;
+  --color-text-faint: #7d8699;
+
+  /* Accent: cyan / sky */
+  --color-accent: #38bdf8;
+  --color-accent-light: #7dd3fc;
+  --color-accent-dim: rgba(56, 189, 248, 0.12);
+  --color-accent-glow: rgba(56, 189, 248, 0.25);
+
+  /* Accent warm: orange, secondary */
+  --color-warm: #f97316;
+  --color-warm-dim: rgba(249, 115, 22, 0.12);
+
+  /* Architecture diagram node colors */
+  --color-node-client-bg: #0f2236;
+  --color-node-client-border: #38bdf8;
+  --color-node-client-text: #7dd3fc;
+  --color-node-api-bg: #1a1f0f;
+  --color-node-api-border: #84cc16;
+  --color-node-api-text: #bef264;
+  --color-node-db-bg: #1f1410;
+  --color-node-db-border: #f97316;
+  --color-node-db-text: #fdba74;
+  --color-node-external-bg: #1a0f2e;
+  --color-node-external-border: #818cf8;
+  --color-node-external-text: #c7d2fe;
+}
+
+@layer base {
+  /* ── Light mode overrides ── */
+  html.light {
+    --color-bg: #f8fafc;
+    --color-surface: #ffffff;
+    --color-elevated: #f1f5f9;
+    --color-border: #e2e8f0;
+    --color-border-light: #cbd5e1;
+    --color-text: #0f172a;
+    --color-text-muted: #475569;
+    --color-text-faint: #5b6675;
+    --color-accent: #0284c7;
+    --color-accent-light: #0369a1;
+    --color-accent-dim: rgba(2, 132, 199, 0.08);
+    --color-accent-glow: rgba(2, 132, 199, 0.15);
+    --color-warm: #ea580c;
+    --color-warm-dim: rgba(234, 88, 12, 0.08);
+    --color-node-client-bg: #eff6ff;
+    --color-node-client-border: #3b82f6;
+    --color-node-client-text: #1d4ed8;
+    --color-node-api-bg: #f0fdf4;
+    --color-node-api-border: #22c55e;
+    --color-node-api-text: #15803d;
+    --color-node-db-bg: #fff7ed;
+    --color-node-db-border: #f97316;
+    --color-node-db-text: #c2410c;
+    --color-node-external-bg: #faf5ff;
+    --color-node-external-border: #a855f7;
+    --color-node-external-text: #7e22ce;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+  }
+
+  /* Scrollbar: minimal */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border-light);
+    border-radius: 2px;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  /*
+   * Entrance animations are CSS driven on purpose. A JavaScript reveal leaves
+   * `opacity: 0` in the prerendered HTML, so any failure to run it strands the
+   * content invisible. With CSS, the element ends up visible in every case.
+   */
+  @keyframes reveal-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes draw-stroke {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .reveal {
+    animation: reveal-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .fade-in {
+    animation: fade-in 0.2s ease-out both;
+  }
+
+  .signature path {
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
+    animation: draw-stroke 2s ease-in-out 0.6s forwards;
+  }
+
+  .signature circle {
+    animation: fade-in 0.4s ease-out 2.4s both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .fade-in,
+    .signature path,
+    .signature circle {
+      animation: none;
+    }
+    .signature path {
+      stroke-dashoffset: 0;
+    }
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  /* Subtle noise texture overlay for depth */
+  .noise::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    border-radius: inherit;
+  }
+}
