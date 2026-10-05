@@ -11,7 +11,7 @@ Le site est bilingue : français sur `/`, anglais sur `/en/`.
 ## Points clés
 
 - Angular, TypeScript, Node.js, Symfony et PHP 8 au quotidien, avec GitLab CI/CD, Docker et GCP
-- Quatre produits conçus et développés de bout en bout : Datark, AquaPro Manager, AirsoftHub, MamaSafeFood
+- Quatre produits conçus et développés de bout en bout : Datark, AquaPro Manager, Digital Gap Finder, MamaSafeFood
 - Enseignant en développement web à l'Université Côte d'Azur
 
 ---
